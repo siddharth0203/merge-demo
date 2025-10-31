@@ -32,9 +32,11 @@ pipeline {
           echo "🔄 Merging dev → main..."
           try {
             sh '''
-              git fetch origin main
-              git checkout main
-              git merge dev --no-ff -m "Auto merge by Jenkins"
+                git config user.email "jenkins@local"
+                git config user.name "Jenkins CI"
+                git fetch origin main
+                git checkout main
+                git merge dev --no-ff -m "Auto merge by Jenkins"
             '''
             echo "✅ Merge successful."
           } catch (err) {
